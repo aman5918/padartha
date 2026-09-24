@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply transition-colors duration-200 antialiased font-sans;
+  }
+
+  /* Light Theme (Default Warm Paper Editorial) */
+  body.light-theme {
+    background-color: #fbf9f5;
+    color: #1c1917;
+  }
+
+  /* Dark Theme (Midnight Obsidian / Vedic Dark) */
+  body.dark-theme {
+    background-color: #090d16;
+    color: #f8fafc;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(217, 119, 6, 0.06) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(79, 70, 229, 0.06) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.light-theme ::-webkit-scrollbar-track {
+  background: #f5f0ea;
+}
+.light-theme ::-webkit-scrollbar-thumb {
+  background: #d9cfbf;
+  border-radius: 3px;
+}
+.light-theme ::-webkit-scrollbar-thumb:hover {
+  background: #b55b32;
+}
+
+.dark-theme ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
+/* Dynamic Cards for Themes */
+.light-theme .editorial-card {
+  background: #ffffff;
+  border: 1px solid #ede7dd;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 6px 16px -4px rgba(0, 0, 0, 0.03);
+}
+.light-theme .editorial-card-hover:hover {
+  border-color: #d9cfbf;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.06);
+}
+
+.dark-theme .editorial-card {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.dark-theme .editorial-card-hover:hover {
+  border-color: rgba(245, 158, 11, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.15);
+}
+
+/* Sub-panels */
+.light-theme .sub-panel {
+  background-color: #f5f0ea;
+  border: 1px solid #ede7dd;
+  color: #1c1917;
+}
+.dark-theme .sub-panel {
+  background-color: #0f172a;
+  border: 1px solid #1e293b;
+  color: #e2e8f0;
+}
+
+/* Inputs & Selects */
+.light-theme .theme-input {
+  background-color: #ffffff;
+  border: 1px solid #ede7dd;
+  color: #1c1917;
+}
+.light-theme .theme-input:focus {
+  border-color: #b55b32;
+  outline: none;
+}
+
+.dark-theme .theme-input {
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  color: #f8fafc;
+}
+.dark-theme .theme-input:focus {
+  border-color: #f59e0b;
+  outline: none;
+}
+
+/* Dark code block card */
+.dark-obsidian-card {
+  background: #18181b;
+  border: 1px solid #27272a;
+  color: #f4f4f5;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+}
+
+/* Buttons */
+.terracotta-button {
+  background-color: #b55b32;
+  color: #ffffff;
+  transition: all 0.15s ease-in-out;
+}
+.terracotta-button:hover {
+  background-color: #9f4922;
+  box-shadow: 0 4px 12px rgba(181, 91, 50, 0.25);
+}
+
+.forest-button {
+  background-color: #047857;
+  color: #ffffff;
+  transition: all 0.15s ease-in-out;
+}
+.forest-button:hover {
+  background-color: #065f46;
+  box-shadow: 0 4px 12px rgba(4, 120, 87, 0.25);
+}

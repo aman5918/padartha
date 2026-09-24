@@ -1,0 +1,21 @@
+{
+  "name": "padartha-ontology-mern-workspace",
+  "version": "1.0.0",
+  "description": "Padārtha Ontology (Nyāya) as Knowledge Representation Model - Complete MERN Stack Application",
+  "scripts": {
+    "start": "node start-servers.js",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm run dev",
+    "install-all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": [
+    "nyaya-vaisesika",
+    "padartha-ontology",
+    "knowledge-representation",
+    "mern-stack",
+    "iks",
+    "semantic-web"
+  ],
+  "author": "Aman Yadav (Roll 68), Tanish Gupta (Roll 17)",
+  "license": "MIT"
+}

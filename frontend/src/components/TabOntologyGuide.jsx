@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { BookOpen, Layers, Sparkles, Code2, Database, Shield, Zap, CheckCircle2 } from 'lucide-react';
 
-export default function TabOntologyGuide({ classes = {}, gunas = [], karmas = [], abhavas = [] }) {
+export default function TabOntologyGuide({ theme, isDark, classes = {}, gunas = [], karmas = [], abhavas = [] }) {
+  const isDarkMode = isDark !== undefined ? isDark : theme === 'dark';
   const [activeSubTab, setActiveSubTab] = useState('seven-padarthas');
 
   const padarthaPrimitives = [
@@ -73,7 +74,7 @@ export default function TabOntologyGuide({ classes = {}, gunas = [], karmas = []
   return (
     <div className="space-y-6">
       {/* Sub navigation for Guide */}
-      <div className="flex space-x-2 border-b border-slate-800 pb-3 overflow-x-auto">
+      <div className="flex space-x-2 border-b border-zinc-200 dark:border-zinc-800 pb-3 overflow-x-auto">
         {[
           { id: 'seven-padarthas', label: '7 Padārthas (Root Schema)', icon: '🏛️' },
           { id: 'nine-dravyas', label: '9 Dravya Classes', icon: '⚛️' },
@@ -86,8 +87,8 @@ export default function TabOntologyGuide({ classes = {}, gunas = [], karmas = []
             onClick={() => setActiveSubTab(st.id)}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition flex items-center space-x-1.5 ${
               activeSubTab === st.id
-                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                ? 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/40 shadow-sm'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-900'
             }`}
           >
             <span>{st.icon}</span>
@@ -99,31 +100,31 @@ export default function TabOntologyGuide({ classes = {}, gunas = [], karmas = []
       {/* Subtab 1: 7 Padārthas */}
       {activeSubTab === 'seven-padarthas' && (
         <div className="space-y-4">
-          <div className="glass-panel p-4 rounded-xl border border-amber-500/20 bg-amber-950/10 text-xs text-amber-200 leading-relaxed">
+          <div className="p-4 rounded-xl border border-indigo-500/20 bg-indigo-500/10 text-xs text-indigo-900 dark:text-indigo-200 leading-relaxed shadow-sm">
             <strong>Nyāya-Vaiśeṣika Epistemology:</strong> The Padārtha ontology represents everything that is knowable (<em>jñeya</em>) and nameable (<em>abhidheya</em>). In modern Computer Science, it maps directly to Knowledge Representation formalisms, OWL/RDF ontologies, and Object-Oriented paradigms.
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {padarthaPrimitives.map(pad => (
-              <div key={pad.id} className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 glass-panel-hover">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                  <h4 className="text-sm font-bold text-white font-serif">{pad.name}</h4>
-                  <span className="text-[11px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+              <div key={pad.id} className="bg-white dark:bg-[#0C0C0E] p-5 rounded-2xl border border-zinc-200 dark:border-white/[0.07] space-y-3 shadow-sm dark:shadow-[0_4px_24px_rgba(0,0,0,0.6)] hover:border-zinc-300 dark:hover:border-indigo-400/20 hover:-translate-y-0.5 transition-all duration-200">
+                <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-2">
+                  <h4 className="text-sm font-bold text-zinc-900 dark:text-white font-serif">{pad.name}</h4>
+                  <span className="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 font-semibold">
                     {pad.sanskrit}
                   </span>
                 </div>
-                <div className="text-xs text-amber-300/90 font-mono italic">
+                <div className="text-xs text-indigo-700 dark:text-indigo-300/90 font-mono italic">
                   "{pad.sanskritDef}"
                 </div>
-                <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs">
-                  <span className="text-indigo-300 font-semibold">CS Mapping: </span>
-                  <span className="text-slate-300 font-mono">{pad.csConcept}</span>
+                <div className="p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs">
+                  <span className="text-indigo-700 dark:text-indigo-300 font-semibold">CS Mapping: </span>
+                  <span className="text-zinc-800 dark:text-zinc-300 font-mono">{pad.csConcept}</span>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed">
                   {pad.explanation}
                 </p>
-                <div className="text-[11px] text-slate-400 border-t border-slate-800/80 pt-2">
-                  <strong className="text-slate-300">Examples:</strong> {pad.examples}
+                <div className="text-[11px] text-zinc-500 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800/80 pt-2">
+                  <strong className="text-zinc-800 dark:text-zinc-300">Examples:</strong> {pad.examples}
                 </div>
               </div>
             ))}
@@ -138,25 +139,25 @@ export default function TabOntologyGuide({ classes = {}, gunas = [], karmas = []
             {Object.keys(classes).map(k => {
               const cls = classes[k];
               return (
-                <div key={k} className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3 glass-panel-hover">
-                  <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                    <h4 className="text-sm font-bold text-white font-serif">{cls.sanskritName}</h4>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/30">
+                <div key={k} className="bg-white dark:bg-[#0C0C0E] p-5 rounded-2xl border border-zinc-200 dark:border-white/[0.07] space-y-3 shadow-sm hover:border-zinc-300 dark:hover:border-indigo-400/20 hover:-translate-y-0.5 transition-all duration-200">
+                  <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-2">
+                    <h4 className="text-sm font-bold text-zinc-900 dark:text-white font-serif">{cls.sanskritName}</h4>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/30 font-semibold">
                       {cls.substanceType.split(' ')[0]}
                     </span>
                   </div>
-                  <div className="text-xs text-amber-400 font-semibold">{cls.englishName}</div>
-                  <p className="text-xs text-slate-300">{cls.description}</p>
+                  <div className="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">{cls.englishName}</div>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed">{cls.description}</p>
                   
                   <div className="space-y-1.5 text-xs">
-                    <div className="text-[11px] text-amber-300 font-medium">Distinctive Guṇa:</div>
-                    <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-slate-300 font-mono">
+                    <div className="text-[11px] text-indigo-600 dark:text-indigo-300 font-medium">Distinctive Guṇa:</div>
+                    <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[11px] text-zinc-800 dark:text-zinc-300 font-mono">
                       {cls.distinctiveGuna}
                     </div>
                   </div>
 
-                  <div className="text-[11px] text-slate-400 pt-2 border-t border-slate-800">
-                    <strong>Inherent Guṇas:</strong> {cls.gunas.slice(0, 3).join(', ')}...
+                  <div className="text-[11px] text-zinc-500 dark:text-zinc-400 pt-2 border-t border-zinc-200 dark:border-zinc-800">
+                    <strong className="text-zinc-800 dark:text-zinc-300">Inherent Guṇas:</strong> {cls.gunas.slice(0, 3).join(', ')}...
                   </div>
                 </div>
               );
@@ -170,18 +171,18 @@ export default function TabOntologyGuide({ classes = {}, gunas = [], karmas = []
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {gunas.map(g => (
-              <div key={g.id} className="glass-panel p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+              <div key={g.id} className="bg-white dark:bg-[#0C0C0E] p-3.5 rounded-xl border border-zinc-200 dark:border-white/[0.07] space-y-1.5 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-amber-300 font-serif">{g.name}</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400">
+                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-300 font-serif">{g.name}</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-mono">
                     {g.id}
                   </span>
                 </div>
-                <div className="text-xs text-white font-medium">{g.english}</div>
-                <div className="text-[11px] text-slate-400">
-                  <span className="text-purple-300 font-medium">{g.type}</span> • Applies to: {g.appliesTo.join(', ')}
+                <div className="text-xs text-zinc-900 dark:text-white font-medium">{g.english}</div>
+                <div className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                  <span className="text-purple-700 dark:text-purple-300 font-medium">{g.type}</span> • Applies to: {g.appliesTo.join(', ')}
                 </div>
-                <div className="p-1.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-emerald-400">
+                <div className="p-1.5 rounded bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[10px] font-mono text-emerald-700 dark:text-emerald-400">
                   CS: {g.csType}
                 </div>
               </div>
@@ -195,13 +196,13 @@ export default function TabOntologyGuide({ classes = {}, gunas = [], karmas = []
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {karmas.map(k => (
-              <div key={k.id} className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                  <h4 className="text-sm font-bold text-rose-400 font-serif">{k.name}</h4>
-                  <span className="text-xs font-mono text-slate-400">{k.id}</span>
+              <div key={k.id} className="bg-white dark:bg-[#0C0C0E] p-5 rounded-2xl border border-zinc-200 dark:border-white/[0.07] space-y-3 shadow-sm">
+                <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-2">
+                  <h4 className="text-sm font-bold text-rose-600 dark:text-rose-400 font-serif">{k.name}</h4>
+                  <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">{k.id}</span>
                 </div>
-                <div className="text-xs font-semibold text-slate-200">{k.english}</div>
-                <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-indigo-300 font-mono">
+                <div className="text-xs font-semibold text-zinc-800 dark:text-zinc-200">{k.english}</div>
+                <div className="p-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs text-indigo-700 dark:text-indigo-300 font-mono">
                   Method Mapping: {k.csMapping}
                 </div>
               </div>
@@ -212,68 +213,68 @@ export default function TabOntologyGuide({ classes = {}, gunas = [], karmas = []
 
       {/* Subtab 5: Chapter 3 Mapping Table */}
       {activeSubTab === 'cs-mapping' && (
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800 overflow-x-auto">
-          <h4 className="text-sm font-bold text-white font-serif mb-4 flex items-center space-x-2">
-            <Code2 className="w-4 h-4 text-amber-400" />
+        <div className="bg-white dark:bg-[#0C0C0E] p-5 rounded-2xl border border-zinc-200 dark:border-white/[0.07] shadow-sm overflow-x-auto">
+          <h4 className="text-sm font-bold text-zinc-900 dark:text-white font-serif mb-4 flex items-center space-x-2">
+            <Code2 className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
             <span>Chapter 3: Traditional IKS to Modern Computer Science Ontological Mapping</span>
           </h4>
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-800 bg-slate-900/80 text-amber-400 font-mono">
+              <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-indigo-400 font-mono">
                 <th className="p-3">IKS / Traditional Concept</th>
                 <th className="p-3">Philosophical Meaning</th>
                 <th className="p-3">Computer Science Concept</th>
                 <th className="p-3">Implementation in Project</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 text-slate-300">
-              <tr>
-                <td className="p-3 font-bold text-white">Padārtha</td>
+            <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 text-zinc-700 dark:text-zinc-300">
+              <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition">
+                <td className="p-3 font-bold text-zinc-900 dark:text-white">Padārtha</td>
                 <td className="p-3">Category of knowable reality</td>
-                <td className="p-3 text-indigo-300 font-mono">Ontological Primitive / Base Class</td>
-                <td className="p-3 font-mono text-emerald-400">Root Schema Object</td>
+                <td className="p-3 text-indigo-700 dark:text-indigo-300 font-mono">Ontological Primitive / Base Class</td>
+                <td className="p-3 font-mono text-emerald-700 dark:text-emerald-400">Root Schema Object</td>
               </tr>
-              <tr>
-                <td className="p-3 font-bold text-white">Dravya</td>
+              <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition">
+                <td className="p-3 font-bold text-zinc-900 dark:text-white">Dravya</td>
                 <td className="p-3">Substance / Substratum</td>
-                <td className="p-3 text-indigo-300 font-mono">Entity / Node / Object Instance</td>
-                <td className="p-3 font-mono text-emerald-400">Node Object with ID & Class</td>
+                <td className="p-3 text-indigo-700 dark:text-indigo-300 font-mono">Entity / Node / Object Instance</td>
+                <td className="p-3 font-mono text-emerald-700 dark:text-emerald-400">Node Object with ID & Class</td>
               </tr>
-              <tr>
-                <td className="p-3 font-bold text-white">Guṇa</td>
+              <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition">
+                <td className="p-3 font-bold text-zinc-900 dark:text-white">Guṇa</td>
                 <td className="p-3">Inherent static quality</td>
-                <td className="p-3 text-indigo-300 font-mono">Attribute / Datatype Property</td>
-                <td className="p-3 font-mono text-emerald-400">Attribute Array</td>
+                <td className="p-3 text-indigo-700 dark:text-indigo-300 font-mono">Attribute / Datatype Property</td>
+                <td className="p-3 font-mono text-emerald-700 dark:text-emerald-400">Attribute Array</td>
               </tr>
-              <tr>
-                <td className="p-3 font-bold text-white">Karma</td>
+              <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition">
+                <td className="p-3 font-bold text-zinc-900 dark:text-white">Karma</td>
                 <td className="p-3">Dynamic motion / action</td>
-                <td className="p-3 text-indigo-300 font-mono">Method / State Transition</td>
-                <td className="p-3 font-mono text-emerald-400">Action Array</td>
+                <td className="p-3 text-indigo-700 dark:text-indigo-300 font-mono">Method / State Transition</td>
+                <td className="p-3 font-mono text-emerald-700 dark:text-emerald-400">Action Array</td>
               </tr>
-              <tr>
-                <td className="p-3 font-bold text-white">Sāmānya</td>
+              <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition">
+                <td className="p-3 font-bold text-zinc-900 dark:text-white">Sāmānya</td>
                 <td className="p-3">Universal / Genus</td>
-                <td className="p-3 text-indigo-300 font-mono">Class Hierarchy (is-a)</td>
-                <td className="p-3 font-mono text-emerald-400">Taxonomy Parent Link</td>
+                <td className="p-3 text-indigo-700 dark:text-indigo-300 font-mono">Class Hierarchy (is-a)</td>
+                <td className="p-3 font-mono text-emerald-700 dark:text-emerald-400">Taxonomy Parent Link</td>
               </tr>
-              <tr>
-                <td className="p-3 font-bold text-white">Viśeṣa</td>
+              <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition">
+                <td className="p-3 font-bold text-zinc-900 dark:text-white">Viśeṣa</td>
                 <td className="p-3">Ultimate particularity</td>
-                <td className="p-3 text-indigo-300 font-mono">Unique ID / URI / UUID</td>
-                <td className="p-3 font-mono text-emerald-400">Primary Key viseshaId</td>
+                <td className="p-3 text-indigo-700 dark:text-indigo-300 font-mono">Unique ID / URI / UUID</td>
+                <td className="p-3 font-mono text-emerald-700 dark:text-emerald-400">Primary Key viseshaId</td>
               </tr>
-              <tr>
-                <td className="p-3 font-bold text-white">Samavāya</td>
+              <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition">
+                <td className="p-3 font-bold text-zinc-900 dark:text-white">Samavāya</td>
                 <td className="p-3">Inseparable inherence</td>
-                <td className="p-3 text-indigo-300 font-mono">Axiomatic Relation / Strong Aggregation</td>
-                <td className="p-3 font-mono text-emerald-400">Inherence Link Table</td>
+                <td className="p-3 text-indigo-700 dark:text-indigo-300 font-mono">Axiomatic Relation / Strong Aggregation</td>
+                <td className="p-3 font-mono text-emerald-700 dark:text-emerald-400">Inherence Link Table</td>
               </tr>
-              <tr>
-                <td className="p-3 font-bold text-white">Abhāva</td>
+              <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition">
+                <td className="p-3 font-bold text-zinc-900 dark:text-white">Abhāva</td>
                 <td className="p-3">Absence / Non-existence</td>
-                <td className="p-3 text-indigo-300 font-mono">Negation Axiom / Disjointness</td>
-                <td className="p-3 font-mono text-emerald-400">Absence Evaluator</td>
+                <td className="p-3 text-indigo-700 dark:text-indigo-300 font-mono">Negation Axiom / Disjointness</td>
+                <td className="p-3 font-mono text-emerald-700 dark:text-emerald-400">Absence Evaluator</td>
               </tr>
             </tbody>
           </table>

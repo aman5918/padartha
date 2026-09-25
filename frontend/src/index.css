@@ -3,143 +3,205 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply antialiased font-sans;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
   body {
-    @apply transition-colors duration-200 antialiased font-sans;
+    @apply transition-colors duration-200 antialiased font-sans bg-[#FAFAF9] text-zinc-900 dark:bg-black dark:text-zinc-100;
+    min-height: 100vh;
   }
 
-  /* Light Theme (Default Warm Paper Editorial) */
-  body.light-theme {
-    background-color: #fbf9f5;
-    color: #1c1917;
-  }
-
-  /* Dark Theme (Midnight Obsidian / Vedic Dark) */
-  body.dark-theme {
-    background-color: #090d16;
-    color: #f8fafc;
-    background-image: 
-      radial-gradient(at 0% 0%, rgba(217, 119, 6, 0.06) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(79, 70, 229, 0.06) 0px, transparent 50%);
-    background-attachment: fixed;
+  html.dark body {
+    background-color: #000000;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-feature-settings: "liga" 1, "kern" 1;
   }
+
+  ::selection {
+    @apply bg-indigo-600/15 text-indigo-700;
+  }
+
+  html.dark ::selection {
+    @apply bg-indigo-400/25 text-indigo-300;
+  }
 }
 
-/* Scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-.light-theme ::-webkit-scrollbar-track {
-  background: #f5f0ea;
-}
-.light-theme ::-webkit-scrollbar-thumb {
-  background: #d9cfbf;
-  border-radius: 3px;
-}
-.light-theme ::-webkit-scrollbar-thumb:hover {
-  background: #b55b32;
+@layer utilities {
+  /* ── Scrollbar ─────────────────────────────────────────── */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .dark ::-webkit-scrollbar-track,
+  html.dark ::-webkit-scrollbar-track {
+    background: #09090b;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d4d4d8;
+    border-radius: 3px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb,
+  html.dark ::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a1a1aa;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover,
+  html.dark ::-webkit-scrollbar-thumb:hover {
+    background: #52525b;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.dark-theme ::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-.dark-theme ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 3px;
-}
-.dark-theme ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
+@layer components {
+  /* ── Card System ─────────────────────────────────────────── */
+  .editorial-card {
+    @apply bg-white dark:bg-[#0C0C0E]
+           border border-zinc-200 dark:border-white/[0.07]
+           rounded-2xl
+           shadow-[0_1px_3px_rgba(0,0,0,0.04),_0_4px_12px_rgba(0,0,0,0.04)]
+           dark:shadow-[0_1px_0_rgba(255,255,255,0.04),_0_4px_24px_rgba(0,0,0,0.6)]
+           transition-all duration-200;
+  }
+
+  .editorial-card-hover {
+    @apply hover:border-zinc-300 dark:hover:border-indigo-400/20
+           hover:-translate-y-0.5
+           hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]
+           dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.7)]
+           transition-all duration-200;
+  }
+
+  /* Sub-panels — Level 2 surface */
+  .sub-panel {
+    @apply bg-zinc-50 dark:bg-zinc-900/50
+           border border-zinc-200 dark:border-zinc-800
+           text-zinc-900 dark:text-zinc-100
+           rounded-xl transition-colors;
+  }
+
+  /* Theme Inputs & Selects */
+  .theme-input {
+    @apply bg-white dark:bg-zinc-900
+           border border-zinc-200 dark:border-zinc-800
+           text-zinc-900 dark:text-zinc-100
+           placeholder:text-zinc-400 dark:placeholder:text-zinc-600
+           rounded-xl focus:outline-none
+           focus:ring-2 focus:ring-indigo-500/20 dark:focus:ring-indigo-400/20
+           focus:border-indigo-500 dark:focus:border-indigo-400
+           transition-colors;
+  }
+
+  /* Dark code / obsidian block */
+  .dark-obsidian-card {
+    @apply bg-[#0c0c0e] border border-zinc-800/80 text-zinc-100 rounded-2xl
+           shadow-[0_4px_24px_rgba(0,0,0,0.6)];
+  }
+
+  /* ── Primary Action Button — Deep Indigo ────────────────── */
+  .terracotta-button {
+    @apply bg-indigo-600 hover:bg-indigo-500
+           dark:bg-indigo-600 dark:hover:bg-indigo-500
+           text-white font-semibold
+           shadow-sm hover:shadow-md hover:shadow-indigo-900/20
+           active:scale-[0.98] transition-all;
+  }
+
+  /* ── Success / Confirm Button — Emerald ─────────────────── */
+  .forest-button {
+    @apply bg-emerald-700 hover:bg-emerald-600
+           dark:bg-emerald-700 dark:hover:bg-emerald-600
+           text-white font-semibold
+           shadow-sm hover:shadow-md hover:shadow-emerald-900/20
+           active:scale-[0.98] transition-all;
+  }
+
+  /* ── Glass Panel ─────────────────────────────────────────── */
+  .glass-panel {
+    @apply bg-white/90 dark:bg-[#0C0C0E]/80
+           border border-zinc-200/80 dark:border-white/[0.06]
+           backdrop-blur-md rounded-2xl transition-all;
+  }
+
+  .glass-panel-hover {
+    @apply hover:border-zinc-300 dark:hover:border-indigo-400/25
+           hover:-translate-y-0.5
+           hover:shadow-md dark:hover:shadow-[0_10px_25px_-5px_rgba(99,102,241,0.12)]
+           transition-all;
+  }
+
+  /* ── Vedic / Sanskrit Gradient Text (sparse, decorative) ── */
+  .vedic-gradient-text {
+    @apply bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-700
+           dark:from-indigo-300 dark:via-violet-400 dark:to-indigo-400
+           bg-clip-text text-transparent font-bold;
+  }
 }
 
-/* Dynamic Cards for Themes */
-.light-theme .editorial-card {
-  background: #ffffff;
-  border: 1px solid #ede7dd;
-  border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 6px 16px -4px rgba(0, 0, 0, 0.03);
-}
-.light-theme .editorial-card-hover:hover {
-  border-color: #d9cfbf;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.06);
-}
+/* ── Print Engine Stylesheet for Academic Dissertation ─────── */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
 
-.dark-theme .editorial-card {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-.dark-theme .editorial-card-hover:hover {
-  border-color: rgba(245, 158, 11, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.15);
-}
+  header, footer, nav, .no-print, button, .action-toolbar, .toast-notification {
+    display: none !important;
+  }
 
-/* Sub-panels */
-.light-theme .sub-panel {
-  background-color: #f5f0ea;
-  border: 1px solid #ede7dd;
-  color: #1c1917;
-}
-.dark-theme .sub-panel {
-  background-color: #0f172a;
-  border: 1px solid #1e293b;
-  color: #e2e8f0;
-}
+  body, html, #root {
+    background: #ffffff !important;
+    color: #111827 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
 
-/* Inputs & Selects */
-.light-theme .theme-input {
-  background-color: #ffffff;
-  border: 1px solid #ede7dd;
-  color: #1c1917;
-}
-.light-theme .theme-input:focus {
-  border-color: #b55b32;
-  outline: none;
-}
+  main {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
-.dark-theme .theme-input {
-  background-color: #0f172a;
-  border: 1px solid #334155;
-  color: #f8fafc;
-}
-.dark-theme .theme-input:focus {
-  border-color: #f59e0b;
-  outline: none;
-}
-
-/* Dark code block card */
-.dark-obsidian-card {
-  background: #18181b;
-  border: 1px solid #27272a;
-  color: #f4f4f5;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
-}
-
-/* Buttons */
-.terracotta-button {
-  background-color: #b55b32;
-  color: #ffffff;
-  transition: all 0.15s ease-in-out;
-}
-.terracotta-button:hover {
-  background-color: #9f4922;
-  box-shadow: 0 4px 12px rgba(181, 91, 50, 0.25);
-}
-
-.forest-button {
-  background-color: #047857;
-  color: #ffffff;
-  transition: all 0.15s ease-in-out;
-}
-.forest-button:hover {
-  background-color: #065f46;
-  box-shadow: 0 4px 12px rgba(4, 120, 87, 0.25);
+  .print-page,
+  .dissertation-page-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 12mm 15mm !important;
+    width: 100% !important;
+    min-height: 250mm !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    break-inside: avoid !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
 }

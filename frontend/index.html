@@ -6,12 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Padārtha Ontology (Nyāya) — Knowledge Representation & Semantic Reasoner</title>
     
-    <!-- Google Fonts: Newsreader (Editorial Serif), Plus Jakarta Sans (Clean Modern Body), DM Mono (Code) -->
+    <!-- Theme initialisation script to avoid FOUC -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('padartha-theme');
+          var isDark = saved === 'dark';
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Google Fonts: Playfair Display (Prestigious Editorial Serif), Plus Jakarta Sans (Clean Modern Geometric Body), JetBrains Mono (Precision Code) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-[#fbf9f5] text-[#1c1917] antialiased selection:bg-[#b55b32]/20 selection:text-[#b55b32]">
+  <body class="bg-[#FAFAF9] text-zinc-900 dark:bg-black dark:text-zinc-100 antialiased selection:bg-indigo-600/15 selection:text-indigo-700 dark:selection:bg-indigo-400/25 dark:selection:text-indigo-300 min-h-screen">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
